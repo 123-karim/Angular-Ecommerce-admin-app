@@ -1,0 +1,128 @@
+<!-- <div class="item">
+  <div routerLink="/details/{{ data.id }}">
+    <img src="{{ data.image }}" alt="" />
+    <div class="body">
+      <h4>{{ data.title }}</h4>
+      <p>{{ data.description }}</p>
+    </div>
+  </div>
+
+  <div class="px-3 mb-2 d-flex justify-content-between align-item-center">
+    <button
+      type="button"
+      class="btn btn-primary"
+      *ngIf="!bool"
+      (click)="bool = true"
+    >
+      Add ot cart
+    </button>
+    <div class="d-flex w-50" *ngIf="bool">
+      <input type="number" class="form-control" [(ngModel)]="amount" />
+      <button class="btn btn-danger" (click)="getitem()">Add</button>
+    </div>
+    <span>{{ data.price }}</span>
+  </div>
+</div> -->
+<div class="cartBox">
+  <div class="container d-flex justify-content-between col-sm-12">
+    <div>
+      <div>
+        <button
+
+          class="btn btn-dark"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+        (click)="buttonsappear()">
+          Add Product
+        </button>
+      </div>
+      <table class="table table-striped">
+        <thead>
+          <tr style="vertical-align: middle">
+            <th></th>
+            <th style="text-align: center">Name</th>
+            <th style="text-align: center">Category</th>
+            <th style="text-align: center">price</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            style="vertical-align: middle"
+            *ngFor="let item of products; let index = index"
+          >
+            <td><img style="width: 40%" src="{{ item.image }}" alt /></td>
+            <td style="text-align: center">{{ item.title }}</td>
+            <td class="Quantity">
+              {{ item.category }}
+            </td>
+            <td style="text-align: center">{{ item.price }} L.E</td>
+            <td>
+              <button data-bs-toggle="modal"
+              data-bs-target="#exampleModal" style="text-align: center" type="button" class="btn btn-warning"(click)="updateproduct(item)">Update</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div
+    class="modal fade"
+    id="exampleModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="mmm modal-dialog">
+      <div class="pop modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add product</h5>
+          <!-- <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button> -->
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="form">
+            <div class="row d-flex justify-content-center vertical-align-middle">
+              <div class="col-md-4 col-sm-12">
+                <label>Title</label>
+                <input formControlName="title" type="text" class="form-control" placeholder="title" />
+              </div>
+              <div class="col-md-4 col-sm-12">
+                <label>Price</label>
+                <input formControlName="price" type="text" class="form-control" placeholder="Price" />
+              </div>
+              <!--#note# the modal of popup not work will to get value from the next select and i will send the event withapi anyway
+               but all property work will out modal -->
+              <div class="col-md-4 col-sm-12 max-height-0px">
+             <app-select [title]="'Categores:'"[data]="allcategores" (selectvalue)="getselectedcategry($event)"[select]="form.value.category" [all]="false"></app-select>
+            </div>
+
+
+            <div class="col-md-4 col-sm-12">
+              <!-- #note# base64 is used for show with out coding the database i will change it later (too large string)-->
+              <label for="image">image</label>
+              <img src="{{base64}}" alt=""style='max-width: 100%;min-width: 100%;max-height: 80px;min-height: 80px;'>
+              <input  type="file" class="form-control"(change)="getimagepath($event)"/>
+            </div>
+            <div class="col-md-8 col-sm-12">
+              <label>Description</label>
+              <textarea formControlName="description" style="max-width: 100%;min-width: 100%;max-height: 120px;min-height: 120px;" class="form-control" placeholder="product Description"></textarea>
+            </div>
+          </div>
+          </form>
+        </div>
+        <button *ngIf="addingproduct" [disabled]="!form.valid" (click)="addnewproduct()"type="button"class="btn btn-dark mb-2" data-bs-dismiss="modal" style="margin-left: 850px; max-width: 120px">
+          Add product
+        </button>
+        <button (click)="Updatingproductfunc()" *ngIf="upproduct" [disabled]="!form.valid"type="button"class="btn btn-warning mb-2" data-bs-dismiss="modal" style="margin-left: 850px; max-width: 120px">
+          Update
+        </button>
+      </div>
+      <div class="modal-footer"></div>
+    </div>
+  </div>
+</div>

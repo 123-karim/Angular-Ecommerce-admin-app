@@ -1,0 +1,14 @@
+<div class="mt-5">
+  <!-- <div class="my-2 w-25">
+  <app-select [data]="categories" [title]="'Categories:'" (selectvalue)="filtercat($event)"></app-select>
+  </div> -->
+  <div class="col-sm-12" *ngIf="!spin">
+    <div class="col-sm-12"  >
+   <app-product ></app-product>
+    </div>
+  </div>
+  <div class="text-center w-100" *ngIf="spin">
+    <app-spinner></app-spinner>
+  </div>
+</div>
+
